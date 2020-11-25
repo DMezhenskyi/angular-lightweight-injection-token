@@ -1,5 +1,5 @@
-import { Component, ContentChild, OnInit } from '@angular/core';
-import { WidgetHeaderComponent } from './widget-header.component';
+import { Component, ContentChild, Inject, OnInit } from '@angular/core';
+import { HEADER_TOKEN, WidgetHeaderComponent } from './widget-header.component';
 
 @Component({
   selector: 'lib-widget',
@@ -13,12 +13,13 @@ import { WidgetHeaderComponent } from './widget-header.component';
 })
 export class WidgetComponent implements OnInit {
 
-  @ContentChild(WidgetHeaderComponent)
+  @ContentChild(HEADER_TOKEN)
   header: WidgetHeaderComponent | null = null;
 
-  constructor() { }
+  constructor(@Inject(HEADER_TOKEN) private anotherHeader: WidgetHeaderComponent) { }
 
   ngOnInit(): void {
+    // this.anotherHeader.ngOnInit()
   }
 
 }

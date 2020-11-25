@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, InjectionToken, OnInit } from '@angular/core';
+
+export const HEADER_TOKEN = new InjectionToken<WidgetHeaderComponent>('widget-header');
 
 @Component({
   selector: 'lib-widget-header',
@@ -6,7 +8,10 @@ import { Component, OnInit } from '@angular/core';
     <section class="header">
       <h3>Header</h3>
     <section>
-  `
+  `,
+  providers: [
+    { provide: HEADER_TOKEN, useExisting: WidgetHeaderComponent }
+  ]
 })
 export class WidgetHeaderComponent implements OnInit {
 

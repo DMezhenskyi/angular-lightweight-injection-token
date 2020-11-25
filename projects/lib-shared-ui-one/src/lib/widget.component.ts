@@ -1,5 +1,5 @@
-import { Component, ContentChild, OnInit } from '@angular/core';
-import { WidgetHeaderComponent } from './widget-header.component';
+import { AfterViewInit, Component, ContentChild, OnInit, Optional } from '@angular/core';
+import { HeaderToken, WidgetHeaderComponent } from './widget-header.component';
 
 @Component({
   selector: 'lib-widget',
@@ -11,14 +11,18 @@ import { WidgetHeaderComponent } from './widget-header.component';
   styles: [
   ]
 })
-export class WidgetComponent implements OnInit {
+export class WidgetComponent implements OnInit, AfterViewInit {
 
-  @ContentChild(WidgetHeaderComponent)
-  header: WidgetHeaderComponent | null = null;
+  @ContentChild(HeaderToken)
+  header: HeaderToken | null = null;
 
-  constructor() { }
+  constructor(@Optional() private anotherHeader: HeaderToken) { }
 
   ngOnInit(): void {
+  }
+
+  ngAfterViewInit(): void {
+    this.anotherHeader.refresh();
   }
 
 }
